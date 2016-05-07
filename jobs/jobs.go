@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/deis/workflow-manager/components"
 	"github.com/deis/workflow-manager/config"
 	"github.com/deis/workflow-manager/data"
 )
@@ -81,7 +80,7 @@ func runJobs(p []Periodic) {
 //  sendVersions sends cluster version data
 func sendVersions() error {
 	var clustersRoute = "/" + config.Spec.APIVersion + "/clusters/"
-	cluster, err := components.GetCluster(components.InstalledDeisData{}, data.ClusterIDFromPersistentStorage{}, components.LatestReleasedComponent{})
+	cluster, err := data.GetCluster(data.InstalledDeisData{}, data.ClusterIDFromPersistentStorage{}, data.LatestReleasedComponent{})
 	if err != nil {
 		log.Println("error getting installed components data")
 		return err
